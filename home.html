@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+<body>
+    <br><br><br><br><br><br><br><br>
+    <div class="containerr" style="margin-top: 20px;">
+    <div class="content-center"><br><br><br><br><br><br><br><br><br><br>
+        <h1 class="title">HEART DISEASE PREDICTION</h1><br><br>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/heart.jpg') }}" alt="Heart Image" class="heart-image">
+            <img src="{{ url_for('static', filename='images/img6.jpg') }}" alt="Heart Image 1" class="heart-image">
+        </div>
+        <div class="description">
+            <br>
+            <h2>PREDICT YOUR FUTURE FROM US </h2>
+        </div>
+        <br><br>
+        <h2><div class="title">𝒯𝒴𝒫𝐸𝒮 𝒪𝐹 𝐻𝐸𝒜𝑅𝒯 𝒟𝐼𝒮𝐸𝒜𝒮𝐸</div></h2>
+        <br>
+        <div class="bullets">
+            <ul>
+                <li><div class="animated" id="div1">Coronary artery disease (CAD)</div></li>
+                <li><div class="animated" id="div2">Heart failure</div></li>
+                <li><div class="animated" id="div3">Arrhythmias</div></li>
+                <li><div class="animated" id="div4">Heart valve disease</div></li>
+                <li><div class="animated" id="div5">Cardiomyopathy</div></li>
+                <li><div class="animated" id="div6">Congenital heart disease</div></li>
+             </ul>
+        </div>
+        <div class="button-group">
+        <div class="cta-buttons">
+            <a href="{{ url_for('learn_more') }}" class="btn btn-primary">Learn More</a>
+            <a href="{{ url_for('get_started') }}" class="btn btn-secondary">Get Started</a>
+        </div></div>
+        <br><br><br>
+        
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <footer>
+            <center><p><b>&copy; 2024 Heart Disease Prediction. All rights reserved.</p></center>
+        </footer>
+        <br><br><br>
+    </div>
+</body>
+{% endblock %}
+
+<style>
+.content-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px; /* Adjusted to avoid too much space */
+}
+
+
+.i {
+    color: white;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Adjust the gap value as needed */
+}
+.containerr {
+    max-width: 1000px;
+    height: auto;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 48px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.h1 {
+    color: black;
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.heart-image {
+    width: 300px; 
+    margin-top: 20px;
+    margin-left: 40px;
+    height: auto;
+}
+
+.cta-buttons {
+    margin-top: 20px;
+    gap: 270px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 5px;
+    transition: background 0.3s;
+}
+
+.justified-content {
+    text-align: justify;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}   
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+   background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Raleway, sant-elia;
+}
+
+body {
+    background: linear-gradient(120deg, #84E4F7, #84E4F7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+.navbar {
+    width: 100%;
+    background: #84E4F7;
+    padding: 35px 0;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: skyblue;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #A5A391;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding-bottom: 20px;
+}
+
+.bullets li {
+    justify-content: center;
+    color: red;
+}
+
+.screen {
+    background: linear-gradient(90deg, skyblue, #00C8FE);
+    position: relative;
+    height: 600px;
+    width: 360px;
+    box-shadow: 0px 0px 24px skyblue;
+    border-radius: 20px;
+}
+
+.screen__content {
+    z-index: 1;
+    position: relative;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.screen__background {
+    position: absolute;
+    top: 5;
+    left: 5;
+    right: 5;
+    bottom: 5;
+    z-index: 5;
+    -webkit-clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
+    border-radius: inherit;
+}
+
+.screen_background_shape {
+    transform: rotate(45deg);
+    position: absolute;
+    border-radius: 20px;
+}
+
+.screen_background_shape1 {
+    height: 520px;
+    width: 520px;
+    background: white;
+    top: -50px;
+    right: 120px;
+    border-radius: 20px;
+}
+
+.screen_background_shape2 {
+    height: 220px;
+    width: 220px;
+    background: white;
+    top: -172px;
+    right: 0;
+    border-radius: 20px;
+}
+
+.screen_background_shape3 {
+    height: 540px;
+    width: 190px;
+    background: linear-gradient(270deg, skyblue, #00BDFE);
+    top: -24px;
+    right: 0;
+    border-radius: 20px;
+}
+
+.screen_background_shape4 {
+    height: 1000px;
+    width: 200px;
+    background: white;
+    top: 420px;
+    right: 50px;
+    border-radius: 20px;
+}
+
+.login__title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.register__title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.login {
+    width: 320px;
+    padding: 30px;
+    padding-top: 156px;
+    border-radius: inherit;
+}
+
+.login__field {
+    padding: 20px 0px;
+    position: relative;
+}
+
+.login__icon {
+    position: absolute;
+    top: 30px;
+    color: black;
+}
+
+.login__input {
+    border: none;
+    border-bottom: 2px solid skyblue;
+    background: none;
+    padding: 10px;
+    padding-left: 24px;
+    font-weight: 700;
+    width: 75%;
+    transition: .2s;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+    outline: none;
+    border-bottom-color: #84E4F7;
+}
+
+.login__submit {
+    background: skyblue;
+    font-size: 14px;
+    margin-top: 30px;
+    padding: 16px 20px;
+    border-radius: 26px;
+    border: 1px solid skyblue;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: #4C489D;
+    box-shadow: 0px 2px 2px skyblue;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+    border-color: #000000;
+    outline: none;
+}
+
+.button__icon {
+    font-size: 24px;
+    margin-left: auto;
+    color: #000000;
+}
+
+.button__text {
+    font-weight: 700;
+}
+
+.animated {
+  width: 300px;
+  height: 50px;
+  background-color: black;
+  font-weight: bold;
+  position: relative;
+  animation: mymove 5s;
+  animation-fill-mode: forwards;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Added margin for spacing */
+}
+
+#div1 {animation-timing-function: linear;}
+#div2 {animation-timing-function: ease;}
+#div3 {animation-timing-function: ease-in;}
+#div4 {animation-timing-function: ease-out;}
+#div5 {animation-timing-function: ease-in-out;}
+#div6 {animation-timing-function: linear;}
+
+@keyframes mymove {
+  from {left: 0px;}
+  to {left: 300px;}
+}
+</style>

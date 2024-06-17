@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accuracy Metrics</title>
+</head>
+<body>
+    <h1>Accuracy Metrics</h1>
+    <p>Mean Absolute Error (MAE): {{ metrics.mae }}</p>
+    <p>Mean Squared Error (MSE): {{ metrics.mse }}</p>
+    <p>Median Absolute Error: {{ metrics.median_ae }}</p>
+    <p>Explained Variance Score (EVS): {{ metrics.evs }}</p>
+    <p>R^2 Score: {{ metrics.r2 }}</p>
+    <br>
+    <a href="{{ url_for('prediction_result') }}">Back to Prediction Result</a>
+</body>
+</html>

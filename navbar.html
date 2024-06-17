@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your existing CSS styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Raleway, sans-serif;
+        }
+
+        .h1 {
+            color: black;
+            text-align: center;
+        }
+
+        body {
+            background: linear-gradient(90deg, #84E4F7, #84E4F7);
+            display: flex;
+            padding: 170px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-y: scroll;
+        }
+
+        body.home-page {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            width: 100%;
+            background: #84E4F7;
+            padding: 35px 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 140px;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar ul li a i {
+            margin-right: 8px; /* Space between icon and text */
+        }
+
+        .navbar ul li a:hover {
+            color: #A5A391;
+        }
+
+        /* Flash message styling */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        /* Success message */
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        /* Error message */
+        .alert-error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        /* Warning message */
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin-top: 50px; /* Adjust the margin-top as needed */
+        }
+
+        h1 {
+            margin-top: 0; /* Remove default margin from the h1 element */
+        }
+
+        .heart-image {
+            width: 100px;
+            margin-top: 20px;
+            margin-left: 40px;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            border-radius: 40px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .screen {
+            background: linear-gradient(90deg, skyblue, #00C8FE);
+            position: relative;
+            height: 600px;
+            width: 360px;
+            box-shadow: 0px 0px 24px skyblue;
+            border-radius: 20px; /* Add rounded corners to the screen */
+        }
+
+        .screen__content {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            border-radius: inherit; /* Ensure the content follows the screen's border radius */
+        }
+
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+            border-radius: inherit; /* Ensure the background follows the screen's border radius */
+        }
+
+        .screen__background__shape {
+            transform: rotate(45deg);
+            position: absolute;
+            border-radius: 20px; /* Ensure shapes have rounded corners */
+        }
+
+        .screen__background__shape1 {
+            height: 520px;
+            width: 520px;
+            background: white;
+            top: -50px;
+            right: 120px;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape2 {
+            height: 220px;
+            width: 220px;
+            background: white;
+            top: -172px;
+            right: 0;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, skyblue, #00BDFE);
+            top: -24px;
+            right: 0;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape4 {
+            height: 1000px;
+            width: 200px;
+            background: white;
+            top: 420px;
+            right: 50px;
+            border-radius: 20px;
+        }
+
+        .login__title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .register__title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .login {
+            width: 320px;
+            padding: 30px;
+            padding-top: 156px;
+            border-radius: inherit; /* Ensure the login form follows the screen's border radius */
+        }
+
+        .login__field {
+            padding: 20px 0px;
+            position: relative;
+        }
+
+        .login__icon {
+            position: absolute;
+            top: 30px;
+            color: black;
+        }
+
+        .login__input {
+            border: none;
+            border-bottom: 2px solid skyblue;
+            background: none;
+            padding: 10px;
+            padding-left: 24px;
+            font-weight: 700;
+            width: 75%;
+            transition: .2s;
+        }
+
+        .login__input:active,
+        .login__input:focus,
+        .login__input:hover {
+            outline: none;
+            border-bottom-color: #84E4F7;
+        }
+
+        .login__submit {
+            background: skyblue;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 16px 20px;
+            border-radius: 26px;
+            border: 1px solid skyblue;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            color: #000000;
+            box-shadow: 0px 2px 2px skyblue;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .login__submit:active,
+        .login__submit:focus,
+        .login__submit:hover {
+            border-color: #000000;
+            outline: none;
+        }
+
+        .button__icon {
+            font-size: 24px;
+            margin-left: auto;
+            color: #000000;
+        }
+
+        .button__text {
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body class="home-page">
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Heart Disease Prediction</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+                </li>
+
+                {% if 'user' in session %}
+                    <!-- If user is logged in, show logout link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                {% else %}
+                    <!-- If user is not logged in, show login and register links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="content-center">
+        <h1>Heart Disease Prediction</h1>
+        <img src="{{ url_for('static', filename='images/heart.jpg') }}" alt="Heart Image" class="heart-image">
+        <p>Heart disease, also known as cardiovascular disease, is a term encompassing a range of conditions affecting the heart and blood vessels. These conditions include coronary artery disease, heart attacks, arrhythmias, heart failure, and more. Heart disease is a leading cause of death globally, but with early detection and proper management, many of its complications can be prevented or controlled.</p>
+        <p>Our mission is to provide valuable information and tools to help you understand and manage your heart health. From educational resources to advanced prediction models, we aim to empower you with the knowledge and support needed to take proactive steps towards a healthier heart.</p>
+        <a href="#more-info" class="btn-know-more">Know More</a>
+    </div>
+    <footer>
+        <center>
+            <p><b>&copy; 2024 Heart Disease Prediction. All rights reserved.</b></p>
+        </center>
+    </footer>
+</body>
+</html>

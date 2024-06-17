@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Raleway, sans-serif;
+        }
+
+        .h1 {
+            color: black;
+            text-align: center;
+        }
+
+        body {
+            background: linear-gradient(90deg, #84E4F7, #84E4F7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .navbar {
+            width: 100%;
+            background: #84E4F7;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #A5A391;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+
+        .screen {
+            background: linear-gradient(90deg, skyblue, #00C8FE);
+            position: relative;
+            height: 600px;
+            width: 360px;
+            box-shadow: 0px 0px 24px skyblue;
+            border-radius: 20px;
+        }
+
+        .screen__content {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            border-radius: inherit;
+            padding: 20px;
+        }
+
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+            border-radius: inherit;
+        }
+
+        .screen__background__shape {
+            transform: rotate(45deg);
+            position: absolute;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape1 {
+            height: 520px;
+            width: 520px;
+            background: white;
+            top: -50px;
+            right: 120px;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape2 {
+            height: 220px;
+            width: 220px;
+            background: white;
+            top: -172px;
+            right: 0;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, skyblue, #00BDFE);
+            top: -24px;
+            right: 0;
+            border-radius: 20px;
+        }
+
+        .screen__background__shape4 {
+            height: 1000px;
+            width: 200px;
+            background: white;
+            top: 420px;
+            right: 50px;
+            border-radius: 20px;
+        }
+
+        .login__title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .register__title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .login {
+            width: 320px;
+            padding: 30px;
+            padding-top: 156px;
+            border-radius: inherit;
+        }
+
+        .login__field {
+            padding: 20px 0px;
+            position: relative;
+        }
+
+        .login__icon {
+            position: absolute;
+            top: 30px;
+            color: black;
+        }
+
+        .login__input {
+            border: none;
+            border-bottom: 2px solid skyblue;
+            background: none;
+            padding: 10px;
+            padding-left: 24px;
+            font-weight: 700;
+            width: 75%;
+            transition: .2s;
+            color: black;
+        }
+
+        .login__input:active,
+        .login__input:focus,
+        .login__input:hover {
+            outline: none;
+            border-bottom-color: #84E4F7;
+        }
+
+        .login__submit {
+            background: skyblue;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 16px 20px;
+            border-radius: 26px;
+            border: 1px solid skyblue;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            color: #000000;
+            box-shadow: 0px 2px 2px skyblue;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .login__submit:active,
+        .login__submit:focus,
+        .login__submit:hover {
+            border-color: #000000;
+            outline: none;
+        }
+
+        .button__icon {
+            font-size: 24px;
+            margin-left: auto;
+            color: #000000;
+        }
+
+        .button__text {
+            font-weight: 700;
+        }
+
+        .metrics {
+            margin-top: 20px;
+        }
+
+        .metrics p {
+            margin: 5px 0;
+            color: black;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-error {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block title %}
+    Prediction Result
+{% endblock %}
+
+{% block content %}
+    <div class="screen">
+        <div class="screen__content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <br><br><br><h1>PREDICTION RESULT</h1><br>
+            <h4>PREDICTED OUTPUT:<h4> <b>{{ condition }}</b></h4>
+            <div class="metrics">
+                <h3>Model Accuracy Metrics</h3><br>
+                <p>Mean Absolute Error: <b>{{ metrics.mae }}</b></p>
+                <p>Mean Squared Error: <b>{{ metrics.mse }}</b></p>
+                <p>Median Absolute Error: <b>{{ metrics.median_ae }}</b></p>
+                <p>Explained Variance Score: <b>{{ metrics.evs }}</b></p>
+                <p>R2 Score: <b>{{ metrics.r2 }}</b></p>
+                <br>
+                <center>
+                    <form action="{{ url_for('logout') }}" method="post">
+                        <button class="login__submit" type="submit">Logout</button>
+                    </form>
+                </center>
+            </div>
+        </div>
+
+        <div class="screen__background">
+            <div class="screen__background__shape screen__background__shape1"></div>
+            <div class="screen__background__shape screen__background__shape2"></div>
+            <div class="screen__background__shape screen__background__shape3"></div>
+            <div class="screen__background__shape screen__background__shape4"></div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

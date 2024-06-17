@@ -1,0 +1,132 @@
+<style>
+/* styles.css */
+
+/* General styles */
+body {
+    font-family: Raleway, sans-serif;
+    background: linear-gradient(90deg, #84E4F7, #84E4F7);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 48px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.cta-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn1 {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: red-serifs;
+    font-weight: bold;
+    margin: 5px;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background: #007BFF;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+    background: #6c757d;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-back {
+    background: #FF5733; /* Orange color */
+}
+
+.btn-back:hover {
+    background: #E64520;
+}
+
+.content-center {
+    margin-top: 300px; /* Adjust this value as needed */
+}
+</style>
+{% extends 'base.html' %}
+
+{% block title %}
+    Learn More
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<div class="navbar">
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        {% if 'user_id' in session %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="content-center">
+        <h1 class="title">Learn More About Heart Disease Prediction</h1>
+        <p class="justified-content"><b>
+    Heart disease prediction involves using various health metrics and data analysis techniques to assess an individual's risk of developing heart disease. By understanding key factors and taking proactive measures, individuals can significantly reduce their risk and improve their overall heart health.
+</b></p>
+        <ul>
+            <li><b>♥ Don't smoke or use tobacco ♥</li>
+            <li> ♥ Aim for at least 30 to 60 minutes of activity daily ♥</li>
+            <li>♥ Eat a heart-healthy diet ♥</li>
+            <li>♥ Get quality sleep ♥</li>
+            <li> ♥ Manage stress ♥</li>
+        </ul>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('home') }}" class="btn2 btn-back">Back to Home Page</a>
+            <a href="{{ url_for('login') }}" class="btn2 btn-back">Back to Login Page</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
